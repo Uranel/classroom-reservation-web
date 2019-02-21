@@ -14,6 +14,8 @@ var passport = require('passport');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var reserves = require('./routes/reserves');
+var reservation = require('./routes/reservation');
+var reservation = require('./routes/reservation');
 
 var passportConfig = require('./lib/passport-config');
 
@@ -35,12 +37,11 @@ app.locals.querystring = require('querystring');
 //=======================================================
 mongoose.Promise = global.Promise; // ES6 Native Promise를 mongoose에서 사용한다.
 
-const connStr = 'mongodb://admin:password12@ds123645.mlab.com:23645/mjuclass';
+const connStr = 'mongodb://localhost:27017/test';
 // 아래는 mLab을 사용하는 경우의 예: 본인의 접속 String으로 바꾸세요.
 // const connStr = 'mongodb://dbuser1:mju12345@ds113825.mlab.com:13825/sampledb1';
 mongoose.connect(connStr, {useMongoClient: true });
 mongoose.connection.on('error', console.error);
-
 // Favicon은 웹사이트의 대표 아이콘입니다. Favicon을 만들어서 /public에 둡시다.
 // https://www.favicon-generator.org/ 여기서 만들어볼 수 있어요.
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -92,6 +93,7 @@ app.use(function(req, res, next) {
 app.use('/', users);
 app.use('/home', index);
 app.use('/reserves', reserves);
+app.use('/reservation', reservation);
 // require('./routes/auth')(app, passport);
 // app.use('/api', require('./routes/api'));
 
